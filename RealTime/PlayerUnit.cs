@@ -17,6 +17,7 @@ public class PlayerUnit : Unit
         BattleManager.instance.playerUnitController.UnitReady(this);
     }
 
+    //Since we need to wait for player input in order to know what 
     public void HeresAction(PlayerAction playerAction)
     {
         currentAction = playerAction;
