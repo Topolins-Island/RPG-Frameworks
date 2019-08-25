@@ -24,7 +24,7 @@ public class BattleManager : MonoBehaviour
         StartCoroutine(LineProcessing());
     }
 
-    //A coroutine that handles the turn-based portion of the battle
+    //A coroutine that handles the turn-based portion of the battle mechanics
     IEnumerator LineProcessing()
     {
         //Before each loop we check if the battle is over
