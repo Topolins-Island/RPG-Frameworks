@@ -1,4 +1,4 @@
 # RPGframeworktest
 Simple examples of RPG battle mechanics
 
-These are 
+All of these are code taken from prototype projects, which are all playable on my itch.io.
