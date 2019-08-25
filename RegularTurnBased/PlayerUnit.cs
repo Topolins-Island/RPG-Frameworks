@@ -11,13 +11,13 @@ public class PlayerUnit : Unit
     public List<Ability> abilities;
     Ability currentAbility;
 
+    //Instead of doing whatever, the units ask their controller to show their abilities
     public override void Act()
     {
         controller.DisplayAbilities(this, abilities);
-        //print(name + ": can attack " + myTarget.name);
-        //controller.PaintTargets(this, myTarget);
     }
 
+    //This is a function called by the unit's controller, telling it what ability the player has chosen
     public void AbilityChosen(Ability ability)
     {
         currentAbility = ability;
@@ -25,13 +25,14 @@ public class PlayerUnit : Unit
         controller.PaintTargets(this, myTarget);
     }
 
+    //This function is where the controller tells the unit what unit the player selected
     public void PlayerSelected(Unit target)
     {
-        //target.Damaged(this.damage);
         DoAbility(target);
         BattleManager.instance.Continue();
     }
 
+    //This funciton is a where the chosen ability's data is parsed and what is required is done
     void DoAbility(Unit target)
     {
         if (currentAbility.type == AbilityType.ATTACK)
@@ -58,7 +59,6 @@ public class PlayerUnit : Unit
     }
 }
 
-//This is the start of abilities...
 [System.Serializable]
 public class Ability
 {
@@ -78,73 +78,4 @@ public enum AbilityType
 {
     ATTACK,
     HEAL
-}
-
-public class PlayerUnitEP02 : Unit
-{
-    public Targets myTarget;
-    public string write;
-
-    public override void Act()
-    {
-        Unit myTarget = FindTarget();
-        myTarget.Damaged(this.damage);
-        print(name + ": attacks " + myTarget.name);
-    }
-
-    Unit FindTarget()
-    {
-        Unit target = null;
-        if (myTarget == Targets.MYSELF)
-            target = this;
-        if (myTarget == Targets.MY_LEADER)
-            target = BattleManager.instance.playerLeader;
-        if (myTarget == Targets.MY_SUPPORT)
-            target = BattleManager.instance.playerSupport;
-        if (myTarget == Targets.ENEMY_LEADER)
-            target = BattleManager.instance.enemyLeader;
-        if (myTarget == Targets.ENEMY_SUPPORT)
-            target = BattleManager.instance.enemySupport;
-
-        return target;
-    }
-}
-
-public class PlayerUnitEp03 : Unit
-{
-    [HideInInspector]
-    public PlayerUnitController controller;
-    
-    public string abilityName;
-    public Targets myTarget;
-
-    public override void Act()
-    {
-        Unit myTarget = FindTarget();
-        //print(name + ": can attack " + myTarget.name);
-        //controller.PaintTargets(this, myTarget);
-    }
-
-    public void PlayerSelected(Unit target)
-    {
-        target.Damaged(this.damage);
-        BattleManager.instance.Continue();
-    }
-
-    Unit FindTarget()
-    {
-        Unit target = null;
-        if (myTarget == Targets.MYSELF)
-            target = this;
-        if (myTarget == Targets.MY_LEADER)
-            target = BattleManager.instance.playerLeader;
-        if (myTarget == Targets.MY_SUPPORT)
-            target = BattleManager.instance.playerSupport;
-        if (myTarget == Targets.ENEMY_LEADER)
-            target = BattleManager.instance.enemyLeader;
-        if (myTarget == Targets.ENEMY_SUPPORT)
-            target = BattleManager.instance.enemySupport;
-
-        return target;
-    }
 }
