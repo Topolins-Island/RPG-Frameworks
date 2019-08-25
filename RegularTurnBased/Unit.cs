@@ -19,9 +19,10 @@ public class Unit : MonoBehaviour
         currentHP = maxHP;
     }
 
+    //This is the function that the battlemanager calls and each type of unit override, these being EnemyUnit and PlayerUnit
     public virtual void Act()
     {
-        print("meep");
+        print("Base Act function has been called");
     }
 
     public void Damaged(int _damage)
@@ -46,77 +47,6 @@ public class Unit : MonoBehaviour
 
         hpBarFiller.fillAmount = currentHP / maxHP;
 
-    }
-}
-
-
-public class UnitEp01 : MonoBehaviour
-{
-    public float speed;
-    public string iDoThis;
-    private void Awake()
-    {
-        speed = Random.Range(0f, 7f);
-    }
-
-    public virtual void Act()
-    {
-        print(name + ": " + iDoThis);
-    }
-}
-
-public class UnitEp02 : MonoBehaviour
-{
-    public float speed;
-    public int damage;
-    public int maxHP;
-    public float currentHP;
-
-    private void Awake()
-    {
-        speed = Random.Range(0f, 7f);
-        currentHP = maxHP;
-    }
-
-    public virtual void Act()
-    {
-        print("meep");
-    }
-
-    public void Damaged(int _damage)
-    {
-        currentHP -= _damage;
-    }
-}
-
-public class UnitEp03 : MonoBehaviour
-{
-    public float speed;
-    public int damage;
-    public int maxHP;
-    public float currentHP;
-
-    private void Awake()
-    {
-        speed = Random.Range(0f, 7f);
-        currentHP = maxHP;
-    }
-
-    public virtual void Act()
-    {
-        print("meep");
-    }
-
-    public void Damaged(int _damage)
-    {
-        currentHP -= _damage;
-
-        if (currentHP <= 0)
-        {
-            print("I'm dead!");
-            //BattleManager.instance.UnitDied(this);
-            Destroy(this.gameObject);
-        }
     }
 }
 
