@@ -27,7 +27,8 @@ public class BattleManager : MonoBehaviour
 
     void StartBattle()
     {
-        //Get the playerunits and enemyUnits... how
+        //Get the playerunits and enemyUnits. This is temporary until the units are instantiated
+        //at battle start.
 
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Player"))
             playerUnits.Add(g.GetComponent<Battler>());
