@@ -50,7 +50,6 @@ public class Unit : MonoBehaviour
     }
 }
 
-//Introduced in episode 2, as a way to differentiate abilities
 public enum Targets
 {
     MYSELF,
