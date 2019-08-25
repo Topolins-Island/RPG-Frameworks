@@ -9,7 +9,7 @@ public class PlayerUnit : Unit
     PlayerAction currentAction;
 
     //Instead of immediately going on action bar filled,
-    //WE need the player to choose what they are doing and then
+    //We need the player to choose what they are doing and then
     //go into the line. To do this we need to store our chosen
     //action and do it in Act();
     public override void ActionBarFilled()
