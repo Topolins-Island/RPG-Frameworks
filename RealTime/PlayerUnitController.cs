@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,13 +7,23 @@ using UnityEngine.EventSystems;
 public class PlayerUnitController : MonoBehaviour
 {
     public GameObject selectedPrefab;
+    public List<PlayerUnit> playerLine = new List<PlayerUnit>();
     PlayerUnit current;
     Actions actions;
     
     public void UnitReady(PlayerUnit me)
     {
-        //We are just going to have them attack for now
-        current = me;
+        playerLine.Add(me);
+        if (current == null)
+        {
+            StartUnit(me);
+        }
+    }
+
+    void StartUnit(PlayerUnit unit)
+    {
+        playerLine.Remove(unit);
+        current = unit;
         actions = current.actions;
         SetupActions();
     }
@@ -82,22 +92,25 @@ public class PlayerUnitController : MonoBehaviour
             ShowTargetOver(targ);
         }
 
-        Destroy(boi);
+        Destroy(targetDisplay);
         TargetSelected(action, targ);
     }
 
-    GameObject boi = null;
+    GameObject targetDisplay = null;
     void ShowTargetOver(Unit target)
     {
-        if (boi != null)
-            Destroy(boi);
+        if (targetDisplay != null)
+            Destroy(targetDisplay);
 
-        boi = Instantiate(selectedPrefab, target.transform);
+        targetDisplay = Instantiate(selectedPrefab, target.transform);
     }
 
     void TargetSelected(Action action, Unit selected)
     {
         current.HeresAction(new PlayerAction(action, selected));
+        current = null;
+        if (playerLine.Count > 0)
+            StartUnit(playerLine[0]);
     }
 
     void DisableActions()
