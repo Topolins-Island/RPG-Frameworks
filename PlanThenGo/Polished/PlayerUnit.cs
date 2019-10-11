@@ -1,0 +1,37 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerUnit : Unit
+{
+    public override void FigureOutMove()
+    {
+        BattleManager.instance.playerController.ShowMyStuff(this);
+    }
+
+    public void MoveChosen(Move move, EnemyUnit _target)
+    {
+        currentMove = move;
+        target = _target;
+        BattleManager.instance.UnitReady(this);
+    }
+
+    public override void Act()
+    {
+        Unit temp = target;
+
+        BattleManager.instance.DisplayMessage(ParseMessage(currentMove.message));
+        target = null;
+
+        if(currentMove.type == MoveType.DAMAGE)
+        {
+            temp.Damage(currentMove.damage);
+        }
+    }
+
+    public override void AnotherUnitDied(Unit unit)
+    {
+        if(unit == target)
+            BattleManager.instance.playerController.NeedNewTarget(this, currentMove);
+    }
+}
