@@ -1,4 +1,4 @@
-# RPGframework
+# RPG Frameworks
 Simple examples of RPG battle mechanics
 
 The PlanThenGo folder is my code from the video, separated into each of the steps.
